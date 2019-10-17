@@ -1,11 +1,11 @@
-n_days = input()
+n_days = int(input())
 meat_amount = []
 meat_price = []
 total_meat = 0
 
 
 for i in range(n_days):
-    tuple_input = raw_input().split(' ')
+    tuple_input = input().split(' ')
     meat_amount.append(int(tuple_input[0]))
     total_meat += int(tuple_input[0])
     meat_price.append(int(tuple_input[1]))
@@ -21,4 +21,4 @@ for i in range(1, n_days):
     if temp < best_value:
         best_value = temp
 
-print best_value
+print(best_value)

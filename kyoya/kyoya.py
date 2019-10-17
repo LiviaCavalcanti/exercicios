@@ -1,5 +1,5 @@
-booklet = raw_input()
+booklet = input()
 alphabet_size = 26
 
 
-print (len(booklet) + 1) * 26 - len(booklet)
+print((len(booklet) + 1) * 26 - len(booklet))

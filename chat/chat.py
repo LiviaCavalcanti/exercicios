@@ -1,4 +1,4 @@
-word_input =  raw_input()
+word_input =  input()
 word_match = "hello"
 match_index = 0
 letter =0
