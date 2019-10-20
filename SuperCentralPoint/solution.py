@@ -1,60 +1,38 @@
-import sys
-import collections
-import math
-import itertools as it
+from collections import defaultdict
 
-def readArray(type= int):
-    line = input()
-    return [type(x) for x in line.split()]
+def solution(array):
+  xfreq = defaultdict(list)
+  yfreq = defaultdict(list)
+  for p in array: 
+    x, y = p
+    xfreq[x].append(p)
+    yfreq[y].append(p)
+  num_of_points = 0
+  for p in array: 
+    neighbours = 0 
 
-def solve():
-    n = int(input())
+    for n in xfreq[p[0]]:
+      if (n[1] > p[1]):
+        neighbours += 1
+        break
+    for n in xfreq[p[0]]:
+      if (n[1] < p[1]):
+        neighbours += 1
+        break
+    for n in yfreq[p[1]]:
+      if (n[0] < p[0]):
+        neighbours += 1
+        break 
+    for n in yfreq[p[1]]:
+      if (n[0] >  p[0]):
+        neighbours += 1
+        break 
+    if neighbours == 4: 
+      num_of_points += 1
+  return num_of_points
 
-    points = []
-    for x in range(n):
-        points.append(readArray())
+if __name__ == "__main__":
+  n = int(input())
+  points = [list(map(int, input().split())) for _ in range(n)]
 
-    xfreq = collections.defaultdict(list)
-    yfreq = collections.defaultdict(list)
-
-    for p in points:
-        xfreq[p[0]].append(p)
-        yfreq[p[1]].append(p)
-
-
-    cc = 0
-    for p in points:
-        nb = 0
-
-        # upper neighbours
-        for q in xfreq[p[0]]:
-            if(q[1] > p[1]):
-                nb+= 1
-                break
-
-        # lower neighbours
-        for q in xfreq[p[0]]:
-            if (q[1] < p[1]):
-                nb += 1
-                break
-
-        # left neighbours
-        for q in yfreq[p[1]]:
-            if (q[0] < p[0]):
-                nb += 1
-                break
-
-        # right neighbours
-        for q in yfreq[p[1]]:
-            if (q[0] > p[0]):
-                nb += 1
-                break
-
-        if nb == 4:
-            cc+= 1
-
-    print(cc)
-
-if __name__ == '__main__':
-    sys.stdin = open('input.txt')
-    solve()
+  print(solution(points))
